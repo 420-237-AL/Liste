@@ -1,5 +1,5 @@
 public class Liste {
-    private Noeud premier;
+    private Noeud premier; // Dans une liste, il n'y a pas de tableau, seulement un pointeur vers le premier Noeud.
     private int nbElements;
 
     public Liste() {
@@ -7,11 +7,11 @@ public class Liste {
         this.nbElements = 0;
     }
 
-    public int getNbElements() { // Équivalent à 'ArrayList.size()'
+    public int getNbElements() { // Équivalent à 'LinkedList.size()'
         return nbElements;
     }
 
-    public boolean estVide() { // Équivalent à 'ArrayList.isEmpty()'
+    public boolean estVide() { // Équivalent à 'LinkedList.isEmpty()'
         return nbElements == 0;
     }
 

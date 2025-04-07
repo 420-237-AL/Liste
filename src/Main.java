@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        Liste v1 = new Liste();
+        Liste v1 = new Liste(); // J'ai gardé le nom "v1" pour pouvoir réutiliser le Main de Vecteur.
         System.out.println(v1.getNbElements() + ": " + v1);
 
         v1.ajouter('A');
