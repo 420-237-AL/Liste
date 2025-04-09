@@ -15,8 +15,21 @@ public class Liste {
         return nbElements == 0;
     }
 
+    public void ajouterDebut(char element) {
+        premier = new Noeud(element, premier);
+        nbElements++;
+    }
+
     public void ajouter(char element) {
-        premier = new Noeud(element);
+        Noeud nouveau = new Noeud(element);
+        if (premier == null)
+            premier = nouveau;
+        else {
+            Noeud courant = premier;
+            while (courant.suivant != null)
+                courant = courant.suivant;
+            courant.suivant = nouveau;
+        }
         nbElements++;
     }
 

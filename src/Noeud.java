@@ -7,4 +7,9 @@ public class Noeud {
         this.valeur = valeur;
         this.suivant = null;
     }
+
+    public Noeud(char valeur, Noeud suivant) {
+        this.valeur = valeur;
+        this.suivant = suivant;
+    }
 }
