@@ -12,4 +12,9 @@ public class Noeud {
         this.valeur = valeur;
         this.suivant = suivant;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(valeur);
+    }
 }

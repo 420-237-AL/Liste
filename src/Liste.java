@@ -15,19 +15,35 @@ public class Liste {
         return nbElements == 0;
     }
 
+    // Trouve le noeud à "l'index" désiré
+    private Noeud getNoeud(int index) {
+        Noeud courant = premier;
+        int i = 0;
+        while (courant.suivant != null && i < index - 1) {
+            courant = courant.suivant;
+            i++;
+        }
+        return courant; // Note: si index est plus grand que nbElements, retourne le dernier noeud.
+    }
+
     public void ajouterDebut(char element) {
         premier = new Noeud(element, premier);
         nbElements++;
     }
 
     public void ajouter(char element) {
+        ajouter(element, nbElements);
+    }
+
+    public void ajouter(char element, int index) {
         Noeud nouveau = new Noeud(element);
         if (premier == null)
             premier = nouveau;
         else {
-            Noeud courant = premier;
-            while (courant.suivant != null)
-                courant = courant.suivant;
+            // Étape 1: Trouver le noeud précédent de celui à l'index cherché
+            Noeud courant = getNoeud(index);
+            // Étape 2: Ajouter le nouveau noeud entre le noeud "courant" et le suivant
+            nouveau.suivant = courant.suivant;
             courant.suivant = nouveau;
         }
         nbElements++;
