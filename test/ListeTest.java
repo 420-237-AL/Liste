@@ -16,8 +16,6 @@ class ListeTest {
 
     @Test
     void ajouterElement() {
-        // Un test unitaire "vide" (ou tout simplement sans assertions) passe toujours,
-        // donc il faut toujours s'assurer d'en ajouter au moins une pour qu'il serve à quelque chose.
         assertEquals(3, v1.getNbElements());
         assertEquals("[A, C, E]", v1.toString());
     }

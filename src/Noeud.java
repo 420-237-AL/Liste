@@ -15,6 +15,9 @@ public class Noeud {
 
     @Override
     public String toString() {
-        return String.valueOf(valeur);
+        if (suivant != null)
+            return String.valueOf(valeur) + " -> " + String.valueOf(suivant.valeur);
+        else
+            return String.valueOf(valeur);
     }
 }

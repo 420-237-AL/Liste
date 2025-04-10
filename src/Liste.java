@@ -23,7 +23,7 @@ public class Liste {
             courant = courant.suivant;
             i++;
         }
-        return courant; // Note: si index est plus grand que nbElements, retourne le dernier noeud.
+        return courant; // Note: Si 'index' est plus grand que nbElements, retourne le dernier noeud.
     }
 
     public void ajouterDebut(char element) {
