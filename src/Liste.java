@@ -69,6 +69,50 @@ public class Liste {
             this.ajouter(autre.get(i));
     }
 
+    public int trouver(char element) { // Équivalent à 'ArrayList.indexOf(element)'
+        for (int i = 0; i < nbElements; i++)
+            if (get(i) == element)
+                return i;
+        return -1;
+    }
+
+    public int trouverRapide(char element) { // Équivalent à 'ArrayList.indexOf(element)'
+        int i = 0;
+        for (Noeud courant = premier; courant != null; courant = courant.suivant) {
+            if (courant.valeur == element)
+                return i;
+            else
+                i++;
+        }
+        return -1;
+    }
+
+    // Cette "surcharge" de trouverTout() retourne le nombre d'éléments communs entre les vecteurs.
+    public int trouverNbCommuns(Liste autre) { // On ne peut pas l'appeler trouverTout() car seul le type de retour est différent :(
+        int communs = 0;
+        for (int i = 0; i < autre.getNbElements(); i++)
+            if (this.trouver(autre.get(i)) != -1)
+                communs++;
+        return communs;
+    }
+
+    // Cette "surcharge" de trouverTout() retourne le nombre d'éléments communs entre les vecteurs.
+    public int trouverNbCommuns(Vecteur autre) { // On ne peut pas l'appeler trouverTout() car seul le type de retour est différent :(
+        int communs = 0;
+        for (int i = 0; i < autre.getNbElements(); i++)
+            if (this.trouver(autre.get(i)) != -1)
+                communs++;
+        return communs;
+    }
+
+    public boolean trouverTout(Liste autre) {
+        return (this.trouverNbCommuns(autre) == autre.getNbElements()); // Pas besoin d'un 'if' puisque l'opérateur '==' retourne déjà un booléen.
+    }
+
+    public boolean trouverTout(Vecteur autre) {
+        return (this.trouverNbCommuns(autre) == autre.getNbElements()); // Pas besoin d'un 'if' puisque l'opérateur '==' retourne déjà un booléen.
+    }
+
     public String toString() {
         StringBuilder s = new StringBuilder("[");
         if (nbElements > 0) {

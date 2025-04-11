@@ -24,7 +24,13 @@ public class Main {
         v1.ajouterTout(v2);
         System.out.println(v1.getNbElements() + ": " + v1);
 
-        //v1.ajouter(v1); // BONUS
-        //System.out.println(v1.getNbElements() + ": " + v1);
+        v1.ajouterTout(v1); // BONUS
+        System.out.println(v1.getNbElements() + ": " + v1);
+
+        // Test de trouver(element)
+        System.out.print("i= " + v1.trouver('D'));
+        System.out.print(", " + v1.trouver('A'));
+        System.out.print(", " + v1.trouver('H'));
+        System.out.println(", " + v1.trouver('X'));
     }
 }
