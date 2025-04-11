@@ -13,5 +13,18 @@ public class Main {
         v1.ajouter('B', 1);
         v1.ajouter('D', 3);
         System.out.println(v1.getNbElements() + ": " + v1);
+
+        // Test de ajouterTout(vecteur)
+        Vecteur v2 = new Vecteur();
+        v2.ajouter('F');
+        v2.ajouter('G');
+        v2.ajouter('H');
+        System.out.println("v2=" + v2);
+
+        v1.ajouterTout(v2);
+        System.out.println(v1.getNbElements() + ": " + v1);
+
+        //v1.ajouter(v1); // BONUS
+        //System.out.println(v1.getNbElements() + ": " + v1);
     }
 }

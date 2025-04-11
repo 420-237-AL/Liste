@@ -15,11 +15,17 @@ public class Liste {
         return nbElements == 0;
     }
 
+    public char get(int index) {
+        if (index >= nbElements)
+            throw new IndexOutOfBoundsException();
+        return getNoeud(index).valeur;
+    }
+
     // Trouve le noeud à "l'index" désiré
     private Noeud getNoeud(int index) {
         Noeud courant = premier;
         int i = 0;
-        while (courant.suivant != null && i < index - 1) {
+        while (courant.suivant != null && i < index) {
             courant = courant.suivant;
             i++;
         }
@@ -37,16 +43,30 @@ public class Liste {
 
     public void ajouter(char element, int index) {
         Noeud nouveau = new Noeud(element);
-        if (premier == null)
+        if (premier == null || index == 0) {
+            nouveau.suivant = premier;
             premier = nouveau;
+        }
         else {
             // Étape 1: Trouver le noeud précédent de celui à l'index cherché
-            Noeud courant = getNoeud(index);
+            Noeud courant = getNoeud(index - 1);
             // Étape 2: Ajouter le nouveau noeud entre le noeud "courant" et le suivant
             nouveau.suivant = courant.suivant;
             courant.suivant = nouveau;
         }
         nbElements++;
+    }
+
+    public void ajouterTout(Liste autre) { // Équivalent à 'ArrayList.addAll(collection)'
+        int stop = autre.getNbElements(); // Cette ligne permet d'éviter une boucle infinie si autre == this;
+        for (int i = 0; i < stop; i++)
+            this.ajouter(autre.get(i));
+    }
+
+    public void ajouterTout(Vecteur autre) { // Équivalent à 'ArrayList.addAll(collection)'
+        int stop = autre.getNbElements(); // Cette ligne permet d'éviter une boucle infinie si autre == this;
+        for (int i = 0; i < stop; i++)
+            this.ajouter(autre.get(i));
     }
 
     public String toString() {
