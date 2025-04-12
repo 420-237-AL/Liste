@@ -15,7 +15,7 @@ public class Main {
         System.out.println(v1.getNbElements() + ": " + v1);
 
         // Test de ajouterTout(vecteur)
-        Vecteur v2 = new Vecteur();
+        Liste v2 = new Liste(); // ou Vecteur v2 = new Vecteur();
         v2.ajouter('F');
         v2.ajouter('G');
         v2.ajouter('H');
@@ -24,13 +24,25 @@ public class Main {
         v1.ajouterTout(v2);
         System.out.println(v1.getNbElements() + ": " + v1);
 
-        v1.ajouterTout(v1); // BONUS
-        System.out.println(v1.getNbElements() + ": " + v1);
+        //v1.ajouterTout(v1); // BONUS: Une liste qui s'ajoute à elle-même.
+        //System.out.println(v1.getNbElements() + ": " + v1);
 
         // Test de trouver(element)
         System.out.print("i= " + v1.trouver('D'));
         System.out.print(", " + v1.trouver('A'));
         System.out.print(", " + v1.trouver('H'));
         System.out.println(", " + v1.trouver('X'));
+
+        // Test de trouver(liste)
+        Liste v3 = new Liste();
+        v3.ajouter('D');
+        v3.ajouter('A');
+        v3.ajouter('H');
+        System.out.print("r=" + v1.trouverNbCommuns(v3));
+        System.out.println(": " + v1.trouverTout(v3));
+
+        v3.ajouter('X');
+        System.out.print("r=" + v1.trouverNbCommuns(v3));
+        System.out.println(": " + v1.trouverTout(v3));
     }
 }

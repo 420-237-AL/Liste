@@ -1,6 +1,6 @@
 public class Liste {
     private Noeud premier; // Dans une liste, il n'y a pas de tableau, seulement un pointeur vers le premier Noeud.
-    private int nbElements;
+    private int nbElements; // L'attribut nbElements n'est pas essentiel, mais il demeure utile.
 
     public Liste() {
         this.premier = null;
@@ -17,7 +17,7 @@ public class Liste {
 
     public char get(int index) {
         if (index >= nbElements)
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException(); // Nous verrons les Exceptions plus tard dans le cours.
         return getNoeud(index).valeur;
     }
 
@@ -32,13 +32,17 @@ public class Liste {
         return courant; // Note: Si 'index' est plus grand que nbElements, retourne le dernier noeud.
     }
 
-    public void ajouterDebut(char element) {
+    public void ajouterDebut(char element) { // Cette méthode n'est pas nécessaire, mais elle est super simple.
         premier = new Noeud(element, premier);
+        // La ligne ci-dessus est équivalente à:
+        // Noeud nouveau = new Noeud(element);
+        // nouveau.suivant = premier;
+        // premier = nouveau;
         nbElements++;
     }
 
     public void ajouter(char element) {
-        ajouter(element, nbElements);
+        ajouter(element, nbElements); // C'est moins de travail de déléguer à ajouter(element, index) que de tout réécrire.
     }
 
     public void ajouter(char element, int index) {
@@ -48,35 +52,39 @@ public class Liste {
             premier = nouveau;
         }
         else {
-            // Étape 1: Trouver le noeud précédent de celui à l'index cherché
+            // Étape 1: Trouver le noeud précédent celui à l'index recherché.
             Noeud courant = getNoeud(index - 1);
-            // Étape 2: Ajouter le nouveau noeud entre le noeud "courant" et le suivant
+
+            // Étape 2: Ajouter le nouveau noeud entre le noeud "courant" et le suivant.
             nouveau.suivant = courant.suivant;
             courant.suivant = nouveau;
         }
         nbElements++;
     }
 
-    public void ajouterTout(Liste autre) { // Équivalent à 'ArrayList.addAll(collection)'
+    public void ajouterTout(Liste autre) { // Équivalent à 'LinkedList.addAll(collection)'
         int stop = autre.getNbElements(); // Cette ligne permet d'éviter une boucle infinie si autre == this;
         for (int i = 0; i < stop; i++)
             this.ajouter(autre.get(i));
     }
 
-    public void ajouterTout(Vecteur autre) { // Équivalent à 'ArrayList.addAll(collection)'
-        int stop = autre.getNbElements(); // Cette ligne permet d'éviter une boucle infinie si autre == this;
+    // En utilisant seulement des méthodes publiques, on peut réutiliser le même code mais avec un Vecteur en paramètre.
+    public void ajouterTout(Vecteur autre) {
+        int stop = autre.getNbElements();
         for (int i = 0; i < stop; i++)
             this.ajouter(autre.get(i));
     }
 
-    public int trouver(char element) { // Équivalent à 'ArrayList.indexOf(element)'
+    // On peut reprendre la méthode trouver(element) de la classe Vecteur presque sans changements.
+    public int trouver(char element) {
         for (int i = 0; i < nbElements; i++)
-            if (get(i) == element)
+            if (get(i) == element) // On utilise get(i) au lieu de tab[i]; En fait le même code marcherait dans Vecteur aussi.
                 return i;
         return -1;
     }
 
-    public int trouverRapide(char element) { // Équivalent à 'ArrayList.indexOf(element)'
+    // Cette variante de 'trouver()' est sensiblement plus rapide que la précédente pour obtenir son résultat.
+    public int trouverRapide(char element) {
         int i = 0;
         for (Noeud courant = premier; courant != null; courant = courant.suivant) {
             if (courant.valeur == element)
@@ -87,17 +95,7 @@ public class Liste {
         return -1;
     }
 
-    // Cette "surcharge" de trouverTout() retourne le nombre d'éléments communs entre les vecteurs.
-    public int trouverNbCommuns(Liste autre) { // On ne peut pas l'appeler trouverTout() car seul le type de retour est différent :(
-        int communs = 0;
-        for (int i = 0; i < autre.getNbElements(); i++)
-            if (this.trouver(autre.get(i)) != -1)
-                communs++;
-        return communs;
-    }
-
-    // Cette "surcharge" de trouverTout() retourne le nombre d'éléments communs entre les vecteurs.
-    public int trouverNbCommuns(Vecteur autre) { // On ne peut pas l'appeler trouverTout() car seul le type de retour est différent :(
+    public int trouverNbCommuns(Liste autre) { // Ici aussi on pourrait recopier cette méthode avec un paramètre de type Vecteur.
         int communs = 0;
         for (int i = 0; i < autre.getNbElements(); i++)
             if (this.trouver(autre.get(i)) != -1)
@@ -106,10 +104,6 @@ public class Liste {
     }
 
     public boolean trouverTout(Liste autre) {
-        return (this.trouverNbCommuns(autre) == autre.getNbElements()); // Pas besoin d'un 'if' puisque l'opérateur '==' retourne déjà un booléen.
-    }
-
-    public boolean trouverTout(Vecteur autre) {
         return (this.trouverNbCommuns(autre) == autre.getNbElements()); // Pas besoin d'un 'if' puisque l'opérateur '==' retourne déjà un booléen.
     }
 
