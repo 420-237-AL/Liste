@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ListeTest {
-    Liste v1;
+    Liste<Character> v1;
 
     @BeforeEach
     void setUp() { //
-        v1 = new Liste();
+        v1 = new Liste<Character>();
         v1.ajouter('A');
         v1.ajouter('C');
         v1.ajouter('E');
@@ -52,24 +52,7 @@ class ListeTest {
     void ajouterListe() {
         // Étape 1: Préparer les données du test
         // Pas besoin de préparer une tonne de données, souvent quelques-unes suffisent.
-        Liste v2 = new Liste();
-        v2.ajouter('F');
-        v2.ajouter('G');
-        v2.ajouter('H');
-
-        // Étape 2: Utiliser la ou les méthodes à tester
-        v1.ajouterTout(v2);
-
-        // Étape 3: Valider les résultats attendus vs. obtenus
-        assertEquals(6, v1.getNbElements());
-        assertEquals("[A, C, E, F, G, H]", v1.toString());
-    }
-
-    @Test
-    void ajouterVecteur() {
-        // Étape 1: Préparer les données du test
-        // Pas besoin de préparer une tonne de données, souvent quelques-unes suffisent.
-        Vecteur v2 = new Vecteur();
+        Liste<Character> v2 = new Liste<Character>();
         v2.ajouter('F');
         v2.ajouter('G');
         v2.ajouter('H');
@@ -101,16 +84,16 @@ class ListeTest {
     }
 
     @Test
-    void trouverVecteur() {
+    void trouverListe() {
         // Étape 1: Préparer les données du test
-        v1 = new Liste(); // Cette fois, on préfère partir d'un nouveau vecteur configuré sur mesure.
+        v1 = new Liste<Character>(); // Cette fois, on préfère partir d'un nouveau vecteur configuré sur mesure.
         v1.ajouter('A');
         v1.ajouter('B');
         v1.ajouter('C');
         v1.ajouter('D');
         v1.ajouter('E');
 
-        Vecteur v2 = new Vecteur();
+        Liste<Character> v2 = new Liste<>();
         v2.ajouter('A');
         v2.ajouter('C');
         v2.ajouter('E');

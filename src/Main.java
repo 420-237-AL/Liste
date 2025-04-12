@@ -1,24 +1,29 @@
+import java.util.ArrayList;
+
 public class Main {
+
     public static void main(String[] args) {
-        Liste v1 = new Liste(); // J'ai gardé le nom "v1" pour pouvoir réutiliser le Main de Vecteur.
+        ArrayList<Character> example = new ArrayList<>();
+
+        Liste<Integer> v1 = new Liste(); // J'ai gardé le nom "v1" pour pouvoir réutiliser le Main de Vecteur.
         System.out.println(v1.getNbElements() + ": " + v1);
 
         // Test de ajouter(element) et ajouter(index)
-        v1.ajouter('A');
-        v1.ajouter('C');
-        v1.ajouter('E');
+        v1.ajouter((int)'A');
+        v1.ajouter((int)'C');
+        v1.ajouter((int)'E');
         System.out.println(v1.getNbElements() + ": " + v1);
 
         // Test de ajouter(index) et getNoeud()
-        v1.ajouter('B', 1);
-        v1.ajouter('D', 3);
+        v1.ajouter((int)'B', 1);
+        v1.ajouter((int)'D', 3);
         System.out.println(v1.getNbElements() + ": " + v1);
 
         // Test de ajouterTout(vecteur)
-        Vecteur v2 = new Vecteur();
-        v2.ajouter('F');
-        v2.ajouter('G');
-        v2.ajouter('H');
+        Liste<Integer> v2 = new Liste<>();
+        v2.ajouter((int)'F');
+        v2.ajouter((int)'G');
+        v2.ajouter((int)'H');
         System.out.println("v2=" + v2);
 
         v1.ajouterTout(v2);
@@ -28,9 +33,9 @@ public class Main {
         System.out.println(v1.getNbElements() + ": " + v1);
 
         // Test de trouver(element)
-        System.out.print("i= " + v1.trouver('D'));
-        System.out.print(", " + v1.trouver('A'));
-        System.out.print(", " + v1.trouver('H'));
-        System.out.println(", " + v1.trouver('X'));
+        System.out.print("i= " + v1.trouver((int)'D'));
+        System.out.print(", " + v1.trouver((int)'A'));
+        System.out.print(", " + v1.trouver((int)'H'));
+        System.out.println(", " + v1.trouver((int)'X'));
     }
 }
