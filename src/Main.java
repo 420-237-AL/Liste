@@ -44,5 +44,13 @@ public class Main {
         v3.ajouter('X');
         System.out.print("r=" + v1.trouverNbCommuns(v3));
         System.out.println(": " + v1.trouverTout(v3));
+
+        // Test de effacer(element)
+        v1.retirer('D');
+        v1.retirer('A');
+        v1.retirer('H');
+        v1.retirer('X');
+        System.out.print("n=" + v1.getNbElements());
+        System.out.println(", v=" + v1);
     }
 }

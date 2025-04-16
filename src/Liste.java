@@ -23,6 +23,9 @@ public class Liste {
 
     // Trouve le noeud à "l'index" désiré
     private Noeud getNoeud(int index) {
+        if (index < 0)
+            return null;
+
         Noeud courant = premier;
         int i = 0;
         while (courant.suivant != null && i < index) {
@@ -105,6 +108,23 @@ public class Liste {
 
     public boolean trouverTout(Liste autre) {
         return (this.trouverNbCommuns(autre) == autre.getNbElements()); // Pas besoin d'un 'if' puisque l'opérateur '==' retourne déjà un booléen.
+    }
+
+    public boolean retirer(int index) { // N'est pas exigé dans les notes de cours, mais est plutôt utile.
+        if (index == 0) {
+            premier = premier.suivant;
+        }
+        else {
+            Noeud precedent = getNoeud(index - 1);
+            precedent.suivant = precedent.suivant.suivant;
+        }
+        nbElements--;
+        return true;
+    }
+
+    public boolean retirer(char element) {
+        int index = trouver(element);
+        return index != -1 ? retirer(index) : false;
     }
 
     public String toString() {

@@ -116,4 +116,24 @@ class ListeTest {
         assertEquals(3, v1.trouverNbCommuns(v2));
         assertFalse(v1.trouverTout(v2));
     }
+
+    @Test
+    void retirerElement() {
+        // Étape 1: Préparer les données du test
+        // Ici aussi, on se fie sur la méthode setUp() pour mettre les 3 premiers éléments dans v1.
+
+        // Sous-test: Commençons par tenter de retirer un élément non-existant
+        assertFalse(v1.retirer('X'));
+        assertEquals(3, v1.getNbElements());
+        assertEquals("[A, C, E]", v1.toString());
+
+        // Étape 2: Utiliser la ou les méthodes à tester
+        assertTrue(v1.retirer('C')); // Retirer un élément au milieu
+        assertTrue(v1.retirer('E')); // Retirer le dernier élément
+        assertTrue(v1.retirer('A')); // Retirer le premier élément
+
+        // Étape 3: Valider les résultats attendus vs. obtenus
+        assertEquals(0, v1.getNbElements());
+        assertEquals("[]", v1.toString());
+    }
 }
