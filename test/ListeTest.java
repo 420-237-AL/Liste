@@ -136,4 +136,65 @@ class ListeTest {
         assertEquals(0, v1.getNbElements());
         assertEquals("[]", v1.toString());
     }
+
+    @Test
+    void retirerIndex() {
+        // Étape 1: Préparer les données du test
+        // Ici aussi, on se fie sur la méthode setUp() pour mettre les 3 premiers éléments dans v1.
+
+        // Sous-test: Commençons par tenter de retirer un élément non-existant
+        assertFalse(v1.retirer(3));
+        assertEquals(3, v1.getNbElements());
+        assertEquals("[A, C, E]", v1.toString());
+
+        // Étape 2: Utiliser la ou les méthodes à tester
+        assertTrue(v1.retirer(1)); // Retirer un élément au milieu
+        assertTrue(v1.retirer(1)); // Retirer le dernier élément (maintenant à l'index 1 après le premier retrait).
+        assertTrue(v1.retirer(0)); // Retirer le premier élément
+
+        // Étape 3: Valider les résultats attendus vs. obtenus
+        assertEquals(0, v1.getNbElements());
+        assertEquals("[]", v1.toString());
+    }
+
+    @Test
+    void retirerListe() {
+        // Étape 1: Préparer les données du test
+        v1 = new Liste(); // Cette fois, on a besoin d'un vecteur configuré sur mesure.
+        v1.ajouter('A');
+        v1.ajouter('B');
+        v1.ajouter('C');
+        v1.ajouter('D');
+        v1.ajouter('E');
+
+        Liste v2 = new Liste();
+        v2.ajouter('A');
+        v2.ajouter('C');
+        v2.ajouter('E');
+
+        // Étapes 2 et 3: Valider les résultats attendus vs. obtenus
+        assertTrue(v1.retirerTout(v2));
+        assertEquals(2, v1.getNbElements());
+        assertEquals("[B, D]", v1.toString());
+
+        // Sous-test: Retirer un élément inexistant
+        Liste v3 = new Liste();
+        v3.ajouter('B');
+        v3.ajouter('X');
+
+        assertFalse(v1.retirerTout(v3));
+        assertEquals(1, v1.getNbElements());
+        assertEquals("[D]", v1.toString());
+    }
+
+    @Test
+    void retirerTout() {
+        // Étape 2: Utiliser la ou les méthodes à tester
+        v1.retirerTout();
+
+        // Étape 3: Valider les résultats attendus vs. obtenus
+        assertEquals(0, v1.getNbElements());
+        assertEquals("[]", v1.toString());
+        assertTrue(v1.estVide());
+    }
 }

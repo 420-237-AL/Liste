@@ -111,6 +111,9 @@ public class Liste {
     }
 
     public boolean retirer(int index) { // N'est pas exigé dans les notes de cours, mais est plutôt utile.
+        if (index >= nbElements)
+            return false;
+
         if (index == 0) {
             premier = premier.suivant;
         }
@@ -125,6 +128,20 @@ public class Liste {
     public boolean retirer(char element) {
         int index = trouver(element);
         return index != -1 ? retirer(index) : false;
+    }
+
+    public boolean retirerTout(Liste autre) {
+        boolean reussite = true;
+        //for (int i = 0; i < autre.nbElements; i++)
+        //    reussite &= retirer(autre.get(i));
+        for (Noeud courant = autre.premier; courant != null; courant = courant.suivant)
+            reussite &= retirer(courant.valeur);
+        return reussite;
+    }
+
+    public void retirerTout() { // Équivalent à 'ArrayList.clear()'
+        this.premier = null;
+        this.nbElements = 0;
     }
 
     public String toString() {
