@@ -82,11 +82,11 @@ public class Liste {
         }
         else {
             // Étape 1: Trouver le noeud précédent celui à l'index recherché.
-            Noeud courant = getNoeud(index - 1);
+            Noeud precedent = getNoeud(index - 1);
 
-            // Étape 2: Ajouter le nouveau noeud entre le noeud "courant" et le suivant.
-            nouveau.suivant = courant.suivant;
-            courant.suivant = nouveau;
+            // Étape 2: Ajouter le nouveau noeud entre le noeud précédent l'index cherché et son noeud suivant actuel.
+            nouveau.suivant = precedent.suivant;
+            precedent.suivant = nouveau;
         }
         nbElements++;
     }
@@ -141,9 +141,11 @@ public class Liste {
             return false;
 
         if (index == 0) {
+            // Retirer le premier élément de la liste est super simple:
             premier = premier.suivant;
         }
         else {
+            // Dans le cas général, on retire le noeud à l'index cible en liant son noeud précédent à son noeud suivant.
             Noeud precedent = getNoeud(index - 1);
             precedent.suivant = precedent.suivant.suivant;
         }
@@ -158,14 +160,16 @@ public class Liste {
 
     public boolean retirerTout(Liste autre) {
         boolean reussite = true;
+        // Version 1: On peut reprendre le même code que pour la classe Vecteur, mais c'est un peu inefficace.
         //for (int i = 0; i < autre.nbElements; i++)
         //    reussite &= retirer(autre.get(i));
+        // Version 2: On fait une boucle directement sur les noeuds de l'autre Liste, évitant ainsi la double boucle de get().
         for (Noeud courant = autre.premier; courant != null; courant = courant.suivant)
             reussite &= retirer(courant.valeur);
         return reussite;
     }
 
-    public void retirerTout() { // Équivalent à 'ArrayList.clear()'
+    public void retirerTout() {
         this.premier = null;
         this.nbElements = 0;
     }
