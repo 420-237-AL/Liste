@@ -130,9 +130,9 @@ class ListeTest {
         assertEquals("[A, C, E]", v1.toString());
 
         // Étape 2: Utiliser la ou les méthodes à tester
-        assertTrue(v1.retirer('C')); // Retirer un élément au milieu
-        assertTrue(v1.retirer('E')); // Retirer le dernier élément
-        assertTrue(v1.retirer('A')); // Retirer le premier élément
+        assertTrue(v1.retirer((Character)'C')); // Retirer un élément au milieu
+        assertTrue(v1.retirer((Character)'E')); // Retirer le dernier élément
+        assertTrue(v1.retirer((Character)'A')); // Retirer le premier élément
 
         // Étape 3: Valider les résultats attendus vs. obtenus
         assertEquals(0, v1.getNbElements());
