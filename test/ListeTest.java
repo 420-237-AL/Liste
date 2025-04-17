@@ -3,6 +3,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// Les tests unitaires de la classe Liste sont presque identiques à ceux de la classe Vecteur;
+// C'est logique puisque les opérations sont sensées avoir les mêmes résultats.
 class ListeTest {
     Liste v1;
 
@@ -177,7 +179,7 @@ class ListeTest {
         assertEquals(2, v1.getNbElements());
         assertEquals("[B, D]", v1.toString());
 
-        // Sous-test: Retirer un élément inexistant
+        // Sous-test: Retirer une liste contenant un élément inexistant
         Liste v3 = new Liste();
         v3.ajouter('B');
         v3.ajouter('X');
@@ -189,10 +191,8 @@ class ListeTest {
 
     @Test
     void retirerTout() {
-        // Étape 2: Utiliser la ou les méthodes à tester
         v1.retirerTout();
 
-        // Étape 3: Valider les résultats attendus vs. obtenus
         assertEquals(0, v1.getNbElements());
         assertEquals("[]", v1.toString());
         assertTrue(v1.estVide());
