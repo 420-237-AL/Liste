@@ -1,19 +1,19 @@
-public class Liste {
+public class Liste<ParamType> {
     private Noeud premier; // Dans une liste, il n'y a pas de tableau, seulement un pointeur vers le premier Noeud.
     private int nbElements; // L'attribut nbElements n'est pas essentiel, mais il demeure utile.
 
     // Lorsqu'une classe est seulement utile comme "partie" d'une autre, on peut la déclarer à l'intérieur de sa parente.
     private class Noeud {
         // La classe Noeud n'étant qu'un simple conteneur de données, on peut laisser ses attributs 'public'.
-        public char valeur;
+        public ParamType valeur;
         public Noeud suivant; // Chaque noeud contient un pointeur vers le prochain noeud de la liste.
 
-        public Noeud(char valeur) {
+        public Noeud(ParamType valeur) {
             this.valeur = valeur;
             this.suivant = null;
         }
 
-        public Noeud(char valeur, Noeud suivant) {
+        public Noeud(ParamType valeur, Noeud suivant) {
             this.valeur = valeur;
             this.suivant = suivant;
         }
@@ -41,7 +41,7 @@ public class Liste {
         return nbElements == 0;
     }
 
-    public char get(int index) {
+    public ParamType get(int index) {
         if (index >= nbElements)
             throw new IndexOutOfBoundsException(); // Nous verrons les Exceptions plus tard dans le cours.
         return getNoeud(index).valeur;
@@ -61,7 +61,7 @@ public class Liste {
         return courant; // Note: Si 'index' est plus grand que nbElements, retourne le dernier noeud.
     }
 
-    public void ajouterDebut(char element) { // Cette méthode n'est pas nécessaire, mais elle est super simple.
+    public void ajouterDebut(ParamType element) { // Cette méthode n'est pas nécessaire, mais elle est super simple.
         premier = new Noeud(element, premier);
         // La ligne ci-dessus est équivalente à:
         // Noeud nouveau = new Noeud(element);
@@ -70,11 +70,11 @@ public class Liste {
         nbElements++;
     }
 
-    public void ajouter(char element) {
+    public void ajouter(ParamType element) {
         ajouter(element, nbElements); // C'est moins de travail de déléguer à ajouter(element, index) que de tout réécrire.
     }
 
-    public void ajouter(char element, int index) {
+    public void ajouter(ParamType element, int index) {
         Noeud nouveau = new Noeud(element);
         if (premier == null || index == 0) {
             nouveau.suivant = premier;
@@ -91,21 +91,21 @@ public class Liste {
         nbElements++;
     }
 
-    public void ajouterTout(Liste autre) { // Équivalent à 'LinkedList.addAll(collection)'
+    public void ajouterTout(Liste<ParamType> autre) { // Équivalent à 'LinkedList.addAll(collection)'
         int stop = autre.getNbElements(); // Cette ligne permet d'éviter une boucle infinie si autre == this;
         for (int i = 0; i < stop; i++)
             this.ajouter(autre.get(i));
     }
 
     // En utilisant seulement des méthodes publiques, on peut réutiliser le même code mais avec un Vecteur en paramètre.
-    public void ajouterTout(Vecteur autre) {
+    public void ajouterTout(Vecteur<ParamType> autre) {
         int stop = autre.getNbElements();
         for (int i = 0; i < stop; i++)
             this.ajouter(autre.get(i));
     }
 
     // On peut reprendre la méthode trouver(element) de la classe Vecteur presque sans changements.
-    public int trouver(char element) {
+    public int trouver(ParamType element) {
         for (int i = 0; i < nbElements; i++)
             if (get(i) == element) // On utilise get(i) au lieu de tab[i]; En fait le même code marcherait dans Vecteur aussi.
                 return i;
@@ -113,7 +113,7 @@ public class Liste {
     }
 
     // Cette variante de 'trouver()' est sensiblement plus rapide que la précédente pour obtenir son résultat.
-    public int trouverRapide(char element) {
+    public int trouverRapide(ParamType element) {
         int i = 0;
         for (Noeud courant = premier; courant != null; courant = courant.suivant) {
             if (courant.valeur == element)
@@ -124,7 +124,7 @@ public class Liste {
         return -1;
     }
 
-    public int trouverNbCommuns(Liste autre) { // Ici aussi on pourrait recopier cette méthode avec un paramètre de type Vecteur.
+    public int trouverNbCommuns(Liste<ParamType> autre) { // Ici aussi on pourrait recopier cette méthode avec un paramètre de type Vecteur.
         int communs = 0;
         for (int i = 0; i < autre.getNbElements(); i++)
             if (this.trouver(autre.get(i)) != -1)
@@ -132,7 +132,7 @@ public class Liste {
         return communs;
     }
 
-    public boolean trouverTout(Liste autre) {
+    public boolean trouverTout(Liste<ParamType> autre) {
         return (this.trouverNbCommuns(autre) == autre.getNbElements()); // Pas besoin d'un 'if' puisque l'opérateur '==' retourne déjà un booléen.
     }
 
@@ -153,12 +153,12 @@ public class Liste {
         return true;
     }
 
-    public boolean retirer(char element) {
+    public boolean retirer(ParamType element) {
         int index = trouver(element);
         return index != -1 ? retirer(index) : false;
     }
 
-    public boolean retirerTout(Liste autre) {
+    public boolean retirerTout(Liste<ParamType> autre) {
         boolean reussite = true;
         // Version 1: On peut reprendre le même code que pour la classe Vecteur, mais c'est un peu inefficace.
         //for (int i = 0; i < autre.nbElements; i++)

@@ -6,12 +6,12 @@ import static org.junit.jupiter.api.Assertions.*;
 // Les tests unitaires de la classe Liste sont presque identiques à ceux de la classe Vecteur;
 // C'est logique puisque les opérations sont sensées avoir les mêmes résultats.
 class ListeTest {
-    Liste v1;
+    Liste<Character> v1;
 
     @BeforeEach
     void setUp() {
         // Étape 1: Préparer les données du test
-        v1 = new Liste();
+        v1 = new Liste<>();
         v1.ajouter('A');
         v1.ajouter('C');
         v1.ajouter('E');
@@ -52,7 +52,7 @@ class ListeTest {
     @Test
     void ajouterListe() {
         // Étape 1: Préparer les données du test
-        Liste v2 = new Liste();
+        Liste<Character> v2 = new Liste<>();
         v2.ajouter('F');
         v2.ajouter('G');
         v2.ajouter('H');
@@ -68,7 +68,7 @@ class ListeTest {
     @Test
     void ajouterVecteur() {
         // Étape 1: Préparer les données du test
-        Vecteur v2 = new Vecteur();
+        Vecteur<Character> v2 = new Vecteur<>();
         v2.ajouter('F');
         v2.ajouter('G');
         v2.ajouter('H');
@@ -98,14 +98,14 @@ class ListeTest {
     @Test
     void trouverListe() {
         // Étape 1: Préparer les données du test
-        v1 = new Liste(); // Cette fois, on préfère partir d'une nouvelle liste configurée sur mesure.
+        v1 = new Liste<>(); // Cette fois, on préfère partir d'une nouvelle liste configurée sur mesure.
         v1.ajouter('A');
         v1.ajouter('B');
         v1.ajouter('C');
         v1.ajouter('D');
         v1.ajouter('E');
 
-        Liste v2 = new Liste();
+        Liste<Character> v2 = new Liste<>();
         v2.ajouter('A');
         v2.ajouter('C');
         v2.ajouter('E');
@@ -162,14 +162,14 @@ class ListeTest {
     @Test
     void retirerListe() {
         // Étape 1: Préparer les données du test
-        v1 = new Liste(); // Cette fois, on a besoin d'un vecteur configuré sur mesure.
+        v1 = new Liste<>(); // Cette fois, on a besoin d'un vecteur configuré sur mesure.
         v1.ajouter('A');
         v1.ajouter('B');
         v1.ajouter('C');
         v1.ajouter('D');
         v1.ajouter('E');
 
-        Liste v2 = new Liste();
+        Liste<Character> v2 = new Liste<>();
         v2.ajouter('A');
         v2.ajouter('C');
         v2.ajouter('E');
@@ -180,7 +180,7 @@ class ListeTest {
         assertEquals("[B, D]", v1.toString());
 
         // Sous-test: Retirer une liste contenant un élément inexistant
-        Liste v3 = new Liste();
+        Liste<Character> v3 = new Liste<>();
         v3.ajouter('B');
         v3.ajouter('X');
 

@@ -1,13 +1,13 @@
-public class Vecteur {
+public class Vecteur<ParamType> {
     private static final int RATIO_AGRANDISSEMENT = 2;
     private static final int CAPACITE_INITIALE = 5;
 
-    private char[] tab; // Les données du Vecteur sont stockées dans un tableau (array).
+    private ParamType[] tab; // Les données du Vecteur sont stockées dans un tableau (array).
     private int nbElements;
 
     // Constructeur avec une capacité initiale configurable (n'est pas exigé dans les notes de cours)
     public Vecteur(int capaciteInitiale) {
-        this.tab = new char[capaciteInitiale];
+        this.tab = (ParamType[])(new Object[capaciteInitiale]);
         this.nbElements = 0;
     }
 
@@ -16,7 +16,7 @@ public class Vecteur {
         this(CAPACITE_INITIALE); // Délégation au constructeur avec une taille initiale.
     }
 
-    public char get(int index) { // Appelé 'getElementAt()' dans les notes de cours
+    public ParamType get(int index) { // Appelé 'getElementAt()' dans les notes de cours
         if (index >= nbElements)
             throw new IndexOutOfBoundsException(); // Nous verrons les Exceptions plus tard dans le cours.
         return tab[index];
@@ -35,19 +35,19 @@ public class Vecteur {
     }
 
     private void agrandir() { // Appelé 'resize()' dans les notes de cours
-        char[] newTab = new char[tab.length * RATIO_AGRANDISSEMENT];
+        ParamType[] newTab = (ParamType[])(new Object[tab.length * RATIO_AGRANDISSEMENT]);
         for (int i = 0; i < tab.length; i++)
             newTab[i] = tab[i];
         tab = newTab;
     }
 
-    public void ajouter(char element) { // Équivalent à 'ArrayList.add(element)'
+    public void ajouter(ParamType element) { // Équivalent à 'ArrayList.add(element)'
         if (estPlein())
             agrandir();
         tab[nbElements++] = element;
     }
 
-    public void ajouter(char element, int index) { // Équivalent à 'ArrayList.add(index, element)'
+    public void ajouter(ParamType element, int index) { // Équivalent à 'ArrayList.add(index, element)'
         if (estPlein())
             agrandir();
         for (int i = nbElements; i >= index; i--)
@@ -56,13 +56,13 @@ public class Vecteur {
         nbElements++;
     }
 
-    public void ajouterTout(Vecteur autre) { // Équivalent à 'ArrayList.addAll(collection)'
+    public void ajouterTout(Vecteur<ParamType> autre) { // Équivalent à 'ArrayList.addAll(collection)'
         int stop = autre.getNbElements(); // Cette ligne permet d'éviter une boucle infinie si autre == this;
         for (int i = 0; i < stop; i++)
             this.ajouter(autre.get(i));
     }
 
-    public int trouver(char element) { // Équivalent à 'ArrayList.indexOf(element)'
+    public int trouver(ParamType element) { // Équivalent à 'ArrayList.indexOf(element)'
         for (int i = 0; i < nbElements; i++)
             if (tab[i] == element)
                 return i;
@@ -70,7 +70,7 @@ public class Vecteur {
     }
 
     // Cette "surcharge" de trouverTout() retourne le nombre d'éléments communs entre les vecteurs.
-    public int trouverNbCommuns(Vecteur autre) { // On ne peut pas l'appeler trouverTout() car seul le type de retour est différent :(
+    public int trouverNbCommuns(Vecteur<ParamType> autre) { // On ne peut pas l'appeler trouverTout() car seul le type de retour est différent :(
         int communs = 0;
         for (int i = 0; i < autre.nbElements; i++)
             if (this.trouver(autre.tab[i]) != -1)
@@ -78,7 +78,7 @@ public class Vecteur {
         return communs;
     }
 
-    public boolean trouverTout(Vecteur autre) {
+    public boolean trouverTout(Vecteur<ParamType> autre) {
         return (this.trouverNbCommuns(autre) == autre.nbElements); // Pas besoin d'un 'if' puisque l'opérateur '==' retourne déjà un booléen.
     }
 
@@ -91,12 +91,12 @@ public class Vecteur {
         return true;
     }
 
-    public boolean retirer(char element) {
+    public boolean retirer(ParamType element) {
         int index = trouver(element);
         return index != -1 ? retirer(index) : false;
     }
 
-    public boolean retirerTout(Vecteur autre) {
+    public boolean retirerTout(Vecteur<ParamType> autre) {
         boolean reussite = true;
         for (int i = 0; i < autre.nbElements; i++)
             reussite &= this.retirer(autre.tab[i]); // L'opérateur '&=' est comme l'opérateur '+=' mais pour l'opération '&&'.
@@ -104,7 +104,7 @@ public class Vecteur {
     }
 
     public void retirerTout() { // Équivalent à 'ArrayList.clear()'
-        this.tab = new char[CAPACITE_INITIALE]; // Créer un nouveau tableau va libérer la mémoire de l'ancien.
+        this.tab = (ParamType[])(new Object[CAPACITE_INITIALE]); // Créer un nouveau tableau va libérer la mémoire de l'ancien.
         this.nbElements = 0;
     }
 
